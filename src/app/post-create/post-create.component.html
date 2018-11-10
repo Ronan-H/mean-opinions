@@ -9,7 +9,7 @@
         required
         minlength="3"
         #title="ngModel">
-      <mat-error *ngIf="title.invalid">Please enter a post title.</mat-error>
+      <mat-error *ngIf="title.invalid">Please enter a title for your poll.</mat-error>
     </mat-form-field>
     <mat-form-field>
       <textarea
@@ -17,9 +17,9 @@
         rows="4"
         name="content"
         ngModel
-        required
+        
         #content="ngModel"></textarea>
-      <mat-error *ngIf="content.invalid">Please enter a post title.</mat-error>
+      <!-- <mat-error *ngIf="content.invalid">Please enter a post title.</mat-error> -->
     </mat-form-field>
     <button
       mat-raised-button

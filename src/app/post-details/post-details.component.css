@@ -1,1 +1,21 @@
 @import '~@angular/material/prebuilt-themes/purple-green.css';
+
+mat-panel-title {
+    font-size: 1.3em;
+}
+
+/*
+mat-panel-description {
+    font-size: 1.15em;
+}
+*/
+
+.optionText {
+    color: lime;
+    font-weight: bold;
+}
+
+.option {
+    color: cyan;
+    font-weight: bold;
+}

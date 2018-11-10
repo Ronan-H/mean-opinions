@@ -3,9 +3,18 @@
 <mat-accordion multi="true" *ngIf="posts.length > 0">
   <mat-expansion-panel [expanded]="true" *ngFor="let post of posts">
     <mat-expansion-panel-header>
-      {{ post.title }}
+      <mat-panel-title>{{ post.title }}</mat-panel-title>
+      <mat-panel-description>{{ post.description }}</mat-panel-description>
     </mat-expansion-panel-header>
-    <p>{{ post.content }}</p>
+
+    <hr />
+
+    <p><span class="optionText">Option A: </span>
+      <span class="option">{{ post.optionA }}</span> - <i>{{ post.aVotes }} votes</i></p>
+      
+    <p><span class="optionText">Option B: </span>
+      <span class="option">{{ post.optionB }}</span> - <i>{{ post.bVotes }} votes</i></p>
+
     <mat-action-row>
       <button mat-button color="primary">EDIT</button>
       <button mat-button (click)="onDelete(post._id)" color="warn">DELETE</button>

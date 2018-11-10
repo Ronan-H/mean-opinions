@@ -16,7 +16,9 @@
       <span class="option">{{ post.optionB }}</span> - <i>{{ post.bVotes }} votes</i></p>
 
     <mat-action-row>
-      <button mat-button color="primary">EDIT</button>
+      <button mat-button (click)="onVote(post._id, 'A')" color="primary">VOTE A</button>
+      <button mat-button (click)="onVote(post._id, 'B')" color="primary">VOTE B</button>
+      <!-- <button mat-button color="primary">EDIT</button> -->
       <button mat-button (click)="onDelete(post._id)" color="warn">DELETE</button>
     </mat-action-row>
   </mat-expansion-panel>

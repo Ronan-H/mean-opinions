@@ -69,6 +69,20 @@ app.get('/api/posts', function(req, res){
     });
 })
 
+app.get('/api/posts/vote/:id/:option', function(req, res){
+    console.log("Vote received");
+    console.log("id: " + req.params.id);
+    console.log("option: " + req.params.option);
+
+    PostModel.findOneAndUpdate({_id:req.params.id},
+        (req.params.option === "A") ? {$inc: {aVotes: 1}} : {$inc: {bVotes: 1}},
+        function(err, data){
+        console.log("Found poll: " + data.title);
+
+        res.json(data);
+    });
+})
+
 app.delete('/api/posts/:id', function(req, res){
     console.log(req.params.id);
 

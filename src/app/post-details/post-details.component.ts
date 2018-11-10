@@ -28,4 +28,12 @@ export class PostDetailsComponent implements OnInit {
         this.ngOnInit();
      })
    }
+
+   onVote(id: String, option: String) {
+    console.log("Vote for called "+ id + ", option " + option);
+    this.ps.addVoteFor(id, option).subscribe(() =>
+    {
+       this.ngOnInit();
+    })
+   }
 }

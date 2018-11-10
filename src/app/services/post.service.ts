@@ -29,4 +29,9 @@ export class PostService {
   deletePost(id: String): Observable<any> {
     return this.http.delete("http://localhost:8081/api/posts/"+id);
   }
+
+  addVoteFor(id: String, option: String) {
+    return this.http.get("http://localhost:8081/api/posts/vote/" + id + "/" + option);
+  }
+
 }

@@ -10,7 +10,11 @@ mongoose.connect(mongoDB);
 var Schema = mongoose.Schema;
 var postSchema = new Schema({
     title: String,
-    content: String
+    description: String,
+    optionA: String,
+    optionB: String,
+    aVotes: Number,
+    bVotes: Number
 })
 var PostModel = mongoose.model('post', postSchema);
 
@@ -40,11 +44,19 @@ app.get('/', function (req, res) {
 app.post('/api/posts', function(req, res){
     console.log("post successful");
     console.log(req.body.title);
-    console.log(req.body.content);
+    console.log(req.body.description);
+    console.log(req.body.optionA);
+    console.log(req.body.optionB);
+    console.log(req.body.aVotes);
+    console.log(req.body.bVotes);
 
     PostModel.create({
         title: req.body.title,
-        content: req.body.content
+        description: req.body.description,
+        optionA: req.body.optionA,
+        optionB: req.body.optionB,
+        aVotes: req.body.aVotes,
+        bVotes: req.body.bVotes
     });
     res.send('Item added');
 

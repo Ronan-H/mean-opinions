@@ -14,8 +14,15 @@ export class PostService {
       return this.http.get("http://localhost:8081/api/posts");
     }
 
-  addPost(title: string, content: string): Observable<any> {
-    const post: Post = {title: title, content: content};
+  addPost(title: string, description: string, optionA: string, optionB: string): Observable<any> {
+    const post: Post = {
+      title: title,
+      description: description,
+      optionA: optionA,
+      optionB: optionB,
+      aVotes: 0,
+      bVotes: 0
+    };
     return this.http.post("http://localhost:8081/api/posts",post);
   }
 

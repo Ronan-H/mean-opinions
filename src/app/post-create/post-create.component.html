@@ -7,6 +7,7 @@
         name="title"
         ngModel
         required
+        placeholder="Poll title"
         minlength="3"
         #title="ngModel">
       <mat-error *ngIf="title.invalid">Please enter a title for your poll.</mat-error>
@@ -17,10 +18,36 @@
         rows="4"
         name="content"
         ngModel
-        
+        placeholder="Poll description (optional)"
+
         #content="ngModel"></textarea>
       <!-- <mat-error *ngIf="content.invalid">Please enter a post title.</mat-error> -->
     </mat-form-field>
+
+    <mat-form-field>
+      <textarea
+        matInput
+        rows="1"
+        name="content"
+        ngModel
+        required
+        placeholder="Option A"
+        #content="ngModel"></textarea>
+      <mat-error *ngIf="content.invalid">Please specify option A.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea
+        matInput
+        rows="1"
+        name="content"
+        ngModel
+        required
+        placeholder="Option B"
+        #content="ngModel"></textarea>
+      <mat-error *ngIf="content.invalid">Please specify option B.</mat-error>
+    </mat-form-field>
+
     <button
       mat-raised-button
       color="accent"

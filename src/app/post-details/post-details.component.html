@@ -1,7 +1,7 @@
 
 <mat-toolbar color="primary">Poll listing</mat-toolbar>
 <mat-accordion multi="true" *ngIf="posts.length > 0">
-  <mat-expansion-panel [expanded]="true" *ngFor="let post of posts">
+  <mat-expansion-panel class="postPanel" [expanded]="true" *ngFor="let post of posts">
     <mat-expansion-panel-header>
       <mat-panel-title>{{ post.title }}</mat-panel-title>
       <mat-panel-description>{{ post.description }}</mat-panel-description>
@@ -9,20 +9,29 @@
 
     <hr />
 
-    <p><span class="optionText">Option A: </span>
-      <span class="option">{{ post.optionA }}</span> - <i>{{ post.aVotes }} votes</i></p>
-      
-    <p><span class="optionText">Option B: </span>
-      <span class="option">{{ post.optionB }}</span> - <i>{{ post.bVotes }} votes</i></p>
+    <div class="pollInfo">
+      <div class="options">
+        <!-- option labels with their corresponding vote counts -->
+        <p><span class="optionText">Option A: </span>
+          <span class="option">{{ post.optionA }}</span> - <i>{{ post.aVotes }} votes</i></p>
+          
+        <p><span class="optionText">Option B: </span>
+          <span class="option">{{ post.optionB }}</span> - <i>{{ post.bVotes }} votes</i></p>
+      </div>
+
+      <!-- canvas for drawing the poll's bar chart to -->
+      <canvas #statCanvas class="statCanvas"></canvas>
+    </div>
 
     <mat-action-row>
+      <!-- buttons to vote for option A or B -->
+      <!-- calls the same function but passes different arguments to specify A or B -->
       <button mat-button (click)="onVote(post._id, 'A')" color="primary">VOTE A</button>
       <button mat-button (click)="onVote(post._id, 'B')" color="primary">VOTE B</button>
-      <!-- <button mat-button color="primary">EDIT</button> -->
+      <!-- button to delete this poll -->
       <button mat-button (click)="onDelete(post._id)" color="warn">DELETE</button>
     </mat-action-row>
-
-    <canvas #statCanvas class="statCanvas"></canvas>
+    
   </mat-expansion-panel>
 </mat-accordion>
 <p class="info-text mat-body-1" *ngIf="posts.length <= 0">No polls added yet!</p> 

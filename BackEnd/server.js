@@ -69,12 +69,15 @@ app.get('/api/posts', function(req, res){
     });
 })
 
+// voting functionality, done with an updating get request
 app.get('/api/posts/vote/:id/:option', function(req, res){
     console.log("Vote received");
     console.log("id: " + req.params.id);
     console.log("option: " + req.params.option);
 
     PostModel.findOneAndUpdate({_id:req.params.id},
+        // increment either aVotes or bVotes depending on which option was passed
+        // up in the request
         (req.params.option === "A") ? {$inc: {aVotes: 1}} : {$inc: {bVotes: 1}},
         function(err, data){
         console.log("Found poll: " + data.title);

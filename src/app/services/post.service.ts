@@ -10,10 +10,11 @@ export class PostService {
 
   constructor(private http: HttpClient) { }
   
-    getPostsData(): Observable<any> {
-      return this.http.get("http://localhost:8081/api/posts");
-    }
+  getPostsData(): Observable<any> {
+    return this.http.get("http://localhost:8081/api/posts");
+  }
 
+  // used a HTTP request to add a poll using a POST request
   addPost(title: string, description: string, optionA: string, optionB: string): Observable<any> {
     const post: Post = {
       title: title,

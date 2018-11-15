@@ -21,8 +21,9 @@ mat-panel-description {
 }
 
 .statCanvas {
-    width: 7em;
-    height: 15em;
+    width: 11em;
+    height: 16em;
     border: 1px solid black;
+    margin: 0.2em;
     background: white;
 }

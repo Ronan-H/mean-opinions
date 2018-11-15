@@ -29,9 +29,12 @@ export class PostDetailsComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    // fix for "this" not working in lambda function
+    let selfRef = this;
+
     this.canvases.changes.subscribe(() =>
       {
-        this.canvases.forEach(canvas => {
+        this.canvases.forEach((canvas, index) => {
           this.context = (<HTMLCanvasElement>canvas.nativeElement).getContext('2d');
 
           let ctx: CanvasRenderingContext2D = this.context;
@@ -40,11 +43,11 @@ export class PostDetailsComponent implements OnInit, AfterViewInit {
             let width: number = ctx.canvas.width;
             let height: number = ctx.canvas.height;
 
-            let barWidth: number = Math.round(width / 6);
+            let barWidth: number = Math.round(width / 3.5);
             let maxBarHeight: number = Math.round(height * 0.8);
 
-            let aVotes: number = 2;
-            let bVotes: number = 1;
+            let aVotes: number = selfRef.posts[index].aVotes;
+            let bVotes: number = selfRef.posts[index].bVotes;
 
             let aBarHeight: number;
             let bBarHeight: number;
@@ -61,14 +64,14 @@ export class PostDetailsComponent implements OnInit, AfterViewInit {
               else {
                 bBarHeight = maxBarHeight;
 
-                bBarHeight = (bVotes / aVotes) * maxBarHeight;
+                aBarHeight = (aVotes / bVotes) * maxBarHeight;
               }
             }
 
             ctx.fillStyle = "red";
 
-            ctx.fillRect(barWidth, (height - aBarHeight), barWidth, aBarHeight);
-            ctx.fillRect(barWidth * 4, (height - bBarHeight), barWidth, bBarHeight);
+            ctx.fillRect(barWidth / 2, (height - aBarHeight), barWidth, aBarHeight);
+            ctx.fillRect(barWidth * 2, (height - bBarHeight), barWidth, bBarHeight);
           }
 
           drawBars();

@@ -1,12 +1,12 @@
 import { Injectable, OnInit } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {Post} from '../post.model';
+import { Poll } from '../poll.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PostService {
+export class PollService {
 
   constructor(private http: HttpClient) { }
   
@@ -16,7 +16,7 @@ export class PostService {
 
   // used a HTTP request to add a poll using a POST request
   addPost(title: string, description: string, optionA: string, optionB: string): Observable<any> {
-    const post: Post = {
+    const post: Poll = {
       title: title,
       description: description,
       optionA: optionA,

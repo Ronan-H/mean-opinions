@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { PostDetailsComponent } from './post-details/post-details.component';
-import {PostService} from './services/post.service';
+import { PollDetailsComponent } from './poll-details/poll-details.component';
+import { PollService } from './services/poll.service';
 import {HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes} from '@angular/router';
@@ -14,16 +14,16 @@ import { MatInputModule,
   MatIconModule,
   MatToolbarModule,
   MatExpansionModule} from '@angular/material';
-import { PostCreateComponent } from './post-create/post-create.component';
+import { PollCreateComponent } from './poll-create/poll-create.component';
 
 const appRoutes: Routes = [
   {
     path: 'list',
-    component: PostDetailsComponent
+    component: PollDetailsComponent
   },
   {
     path: 'create',
-    component: PostCreateComponent
+    component: PollCreateComponent
   }
 ];
 
@@ -31,8 +31,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    PostDetailsComponent,
-    PostCreateComponent
+    PollDetailsComponent,
+    PollCreateComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -49,7 +49,7 @@ const appRoutes: Routes = [
   MatExpansionModule,
   MatMenuModule
   ],
-  providers: [PostService],
+  providers: [PollService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

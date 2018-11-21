@@ -1,4 +1,4 @@
-export interface Post {
+export interface Poll {
   title: string;
   description: string;
   optionA: string;

@@ -1,16 +1,16 @@
 import { Component, OnInit, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
-import {PostService} from '../services/post.service';
+import { PollService } from '../services/poll.service';
 import { Observable } from 'rxjs';
-import {Post} from '../post.model';
+import { Poll } from '../poll.model';
 import { ElementRef } from '@angular/core';
 
 @Component({
-  selector: 'app-post-details',
-  templateUrl: './post-details.component.html',
-  styleUrls: ['./post-details.component.css']
+  selector: 'app-poll-details',
+  templateUrl: './poll-details.component.html',
+  styleUrls: ['./poll-details.component.css']
 })
 
-export class PostDetailsComponent implements OnInit, AfterViewInit {
+export class PollDetailsComponent implements OnInit, AfterViewInit {
   // lines regarding canvas use in Angular taken from StackOverflow question
   //@ViewChild('statCanvas') statCanvas: ElementRef;
   @ViewChildren('statCanvas', {read: ElementRef})
@@ -18,14 +18,14 @@ export class PostDetailsComponent implements OnInit, AfterViewInit {
   private canvases: QueryList<ElementRef>;
   private context: CanvasRenderingContext2D;
   
-  posts: any = [];
+  polls: any = [];
 
-  constructor(private ps:PostService){}
+  constructor(private ps:PollService){}
 
   ngOnInit(){
     //this.posts = this.ps.getPosts();
     this.ps.getPostsData().subscribe(data => {
-        this.posts = data;
+        this.polls = data;
     });
   }
 
@@ -40,8 +40,8 @@ export class PostDetailsComponent implements OnInit, AfterViewInit {
     this.canvases.changes.subscribe(() =>
       {
         this.canvases.forEach((canvas, index) => {
-          let posts = selfRef.posts;
-          let poll = posts[index];
+          let polls = selfRef.polls;
+          let poll = polls[index];
 
           // get the canvas element for drawing
           this.context = (<HTMLCanvasElement>canvas.nativeElement).getContext('2d');

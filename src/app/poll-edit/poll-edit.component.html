@@ -1,0 +1,80 @@
+<mat-card>
+  <form (submit)="onEditPoll(pollForm)" #pollForm="ngForm">
+    <mat-form-field>
+        <input
+          matInput
+          type="text"
+          name="title"
+          ngModel={{poll.title}}
+          required
+          placeholder="Poll title"
+          minlength="3"
+          #title="ngModel">
+        <mat-error *ngIf="title.invalid">Please enter a title for your poll.</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea
+          matInput
+          rows="4"
+          name="description"
+          ngModel={{poll.description}}
+          placeholder="Poll description (optional)"
+  
+          #content="ngModel"></textarea>
+        <!-- <mat-error *ngIf="content.invalid">Please enter a post title.</mat-error> -->
+      </mat-form-field>
+  
+      <mat-form-field>
+        <textarea
+          matInput
+          rows="1"
+          name="optionA"
+          ngModel={{poll.optionA}}
+          required
+          placeholder="Option A"
+          #content="ngModel"></textarea>
+        <mat-error *ngIf="content.invalid">Please specify option A.</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field>
+        <textarea
+          matInput
+          rows="1"
+          name="optionB"
+          ngModel={{poll.optionB}}
+          required
+          placeholder="Option B"
+          #content="ngModel"></textarea>
+        <mat-error *ngIf="content.invalid">Please specify option B.</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field>
+        <textarea
+          matInput
+          rows="1"
+          name="aWinText"
+          ngModel={{poll.aWinText}}
+          required
+          placeholder="Option A win text"
+          #content="ngModel"></textarea>
+        <mat-error *ngIf="content.invalid">Please specify win text for option A.</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field>
+        <textarea
+          matInput
+          rows="1"
+          name="bWinText"
+          ngModel={{poll.bWinText}}
+          required
+          placeholder="Option B win text"
+          #content="ngModel"></textarea>
+        <mat-error *ngIf="content.invalid">Please specify win text for option B.</mat-error>
+      </mat-form-field>
+  
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit">Update Poll</button>
+    </form>
+</mat-card>

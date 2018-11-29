@@ -27,6 +27,7 @@
       <!-- calls the same function but passes different arguments to specify A or B -->
       <button mat-button (click)="onVote(poll._id, 'A')" color="accent">VOTE A</button>
       <button mat-button (click)="onVote(poll._id, 'B')" color="accent">VOTE B</button>
+      <button mat-button [routerLink]="['/edit', poll._id]" color="accent">EDIT</button>
       <!-- button to delete this poll -->
       <button mat-button (click)="onDelete(poll._id)" color="warn">DELETE</button>
     </mat-action-row>

@@ -42,4 +42,32 @@ export class PollService {
     return this.http.get("http://localhost:8081/api/posts/vote/" + id + "/" + option);
   }
 
+  getPoll(id:String): Observable<any> {
+    return this.http.get("http://localhost:8081/api/posts/"+id);
+  }
+
+  updatePoll(id: string,
+    title: string,
+    description: string,
+    optionA: string,
+    optionB: string,
+    aVotes: number,
+    bVotes: number,
+    aWinText: string,
+    bWinText: string): Observable<any> {
+      
+    const poll: Poll = {
+      title: title,
+      description: description,
+      optionA: optionA,
+      optionB: optionB,
+      aVotes: aVotes,
+      bVotes: bVotes,
+      aWinText: aWinText,
+      bWinText: bWinText
+    };
+    
+  return this.http.put("http://localhost:8081/api/posts/"+id, poll);
+}
+
 }

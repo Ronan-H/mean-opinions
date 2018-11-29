@@ -87,6 +87,26 @@ app.get('/api/posts/vote/:id/:option', function(req, res){
     });
 })
 
+app.get('/api/posts/:id', function(req, res){
+    console.log("Getting poll " +req.params.id);
+
+    //PostModel.find({_id : req.params.id}, 
+    PollModel.findById(req.params.id,
+        function (err, data) {
+            res.json(data);
+        });
+})
+
+app.put('/api/posts/:id', function(req, res){
+    console.log("Update Post" +req.params.id);
+    console.log(req.body.title);
+
+    PollModel.findByIdAndUpdate(req.params.id, req.body, 
+        function(err, data){
+            res.send(data);
+        })
+})
+
 app.delete('/api/posts/:id', function(req, res){
     console.log(req.params.id);
 

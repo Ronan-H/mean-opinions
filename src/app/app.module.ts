@@ -16,6 +16,7 @@ import { MatInputModule,
   MatExpansionModule} from '@angular/material';
 import { PollCreateComponent } from './poll-create/poll-create.component';
 import { PollSummaryComponent } from './poll-summary/poll-summary.component';
+import { PollEditComponent } from './poll-edit/poll-edit.component';
 
 const appRoutes: Routes = [
   {
@@ -29,6 +30,10 @@ const appRoutes: Routes = [
   {
     path: 'summary',
     component: PollSummaryComponent
+  },
+  {
+    path: 'edit/:id',
+    component: PollEditComponent
   }
 ];
 
@@ -38,7 +43,8 @@ const appRoutes: Routes = [
     AppComponent,
     PollDetailsComponent,
     PollCreateComponent,
-    PollSummaryComponent
+    PollSummaryComponent,
+    PollEditComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

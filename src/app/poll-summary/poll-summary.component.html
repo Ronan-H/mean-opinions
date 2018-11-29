@@ -1,3 +1,11 @@
-<p>
-  poll-summary works!
-</p>
+<div id="summary">
+    <h3 *ngIf="polls == null">Loading...</h3>
+
+    <h3 *ngIf="polls.length == 0">No polls to display, please create some first.</h3>
+    
+    <div *ngIf="polls.length > 0">
+      <div *ngFor="let poll of polls">
+        <h2>{{ poll.aVotes == poll.bVotes ? "\"" + poll.title + "\" (" + poll.optionA + " or " + poll.optionB + "): even votes, poll undecided." : (poll.aVotes > poll.bVotes ? poll.aWinText : poll.bWinText) }}</h2>
+      </div>
+    </div>
+</div>

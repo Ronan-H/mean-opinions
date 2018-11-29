@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { PollService } from '../services/poll.service';
 
 @Component({
   selector: 'app-poll-summary',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./poll-summary.component.css']
 })
 export class PollSummaryComponent implements OnInit {
+  polls: any = null;
 
-  constructor() { }
+  constructor(private ps:PollService){}
 
-  ngOnInit() {
+  ngOnInit(){
+    //this.posts = this.ps.getPosts();
+    this.ps.getPostsData().subscribe(data => {
+        this.polls = data;
+    });
   }
 
 }

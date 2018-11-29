@@ -8,6 +8,7 @@ import { PollService } from '../services/poll.service';
 })
 export class PollSummaryComponent implements OnInit {
   polls: any = null;
+  totalVotes: number;
 
   constructor(private ps:PollService){}
 
@@ -15,6 +16,12 @@ export class PollSummaryComponent implements OnInit {
     //this.posts = this.ps.getPosts();
     this.ps.getPostsData().subscribe(data => {
         this.polls = data;
+
+        this.totalVotes = 0;
+
+        for (var i = 0; i < this.polls.length; i++) {
+          this.totalVotes += this.polls[i].aVotes + this.polls[i].bVotes;
+        }
     });
   }
 

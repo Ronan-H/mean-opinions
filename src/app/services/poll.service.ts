@@ -15,14 +15,21 @@ export class PollService {
   }
 
   // used a HTTP request to add a poll using a POST request
-  addPost(title: string, description: string, optionA: string, optionB: string): Observable<any> {
+  addPost(title: string,
+    description: string,
+    optionA: string,
+    optionB: string,
+    aWinText: string,
+    bWinText: string): Observable<any> {
     const post: Poll = {
       title: title,
       description: description,
       optionA: optionA,
       optionB: optionB,
       aVotes: 0,
-      bVotes: 0
+      bVotes: 0,
+      aWinText: aWinText,
+      bWinText: bWinText
     };
     return this.http.post("http://localhost:8081/api/posts",post);
   }

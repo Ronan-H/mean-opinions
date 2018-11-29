@@ -8,16 +8,17 @@ var mongoDB = 'mongodb://ronanh:mean-opinionsdbpwd123@ds159293.mlab.com:59293/me
 mongoose.connect(mongoDB);
 
 var Schema = mongoose.Schema;
-var postSchema = new Schema({
+var pollSchema = new Schema({
     title: String,
     description: String,
     optionA: String,
     optionB: String,
     aVotes: Number,
-    bVotes: Number
+    bVotes: Number,
+    aWinText: String,
+    bWinText: String
 })
-var PostModel = mongoose.model('post', postSchema);
-
+var PollModel = mongoose.model('post', pollSchema);
 
 //Here we are configuring express to use body-parser as middle-ware. 
 app.use(bodyParser.urlencoded({ extended: false })); 
@@ -37,10 +38,6 @@ app.post('/name', function(req, res){
     req.body.lastname);
 })
 
-app.get('/', function (req, res) {
-   res.send('Hello from Express');
-})
-
 app.post('/api/posts', function(req, res){
     console.log("post successful");
     console.log(req.body.title);
@@ -49,14 +46,18 @@ app.post('/api/posts', function(req, res){
     console.log(req.body.optionB);
     console.log(req.body.aVotes);
     console.log(req.body.bVotes);
+    console.log(req.body.aWinText);
+    console.log(req.body.bWinText);
 
-    PostModel.create({
+    PollModel.create({
         title: req.body.title,
         description: req.body.description,
         optionA: req.body.optionA,
         optionB: req.body.optionB,
         aVotes: req.body.aVotes,
-        bVotes: req.body.bVotes
+        bVotes: req.body.bVotes,
+        aWinText: req.body.aWinText,
+        bWinText: req.body.bWinText
     });
     res.send('Item added');
 
@@ -64,7 +65,7 @@ app.post('/api/posts', function(req, res){
 })
 
 app.get('/api/posts', function(req, res){
-    PostModel.find(function(err, data){
+    PollModel.find(function(err, data){
         res.json(data);
     });
 })
@@ -75,7 +76,7 @@ app.get('/api/posts/vote/:id/:option', function(req, res){
     console.log("id: " + req.params.id);
     console.log("option: " + req.params.option);
 
-    PostModel.findOneAndUpdate({_id:req.params.id},
+    PollModel.findOneAndUpdate({_id:req.params.id},
         // increment either aVotes or bVotes depending on which option was passed
         // up in the request
         (req.params.option === "A") ? {$inc: {aVotes: 1}} : {$inc: {bVotes: 1}},
@@ -89,7 +90,7 @@ app.get('/api/posts/vote/:id/:option', function(req, res){
 app.delete('/api/posts/:id', function(req, res){
     console.log(req.params.id);
 
-    PostModel.deleteOne({_id:req.params.id},
+    PollModel.deleteOne({_id:req.params.id},
     function(err, data)
     {
         if(err)
@@ -103,5 +104,5 @@ var server = app.listen(8081, function () {
    var host = server.address().address
    var port = server.address().port
    
-   console.log("Example app listening at http://%s:%s", host, port)
+   console.log("MEAN Opinions server listening at http://%s:%s", host, port)
 })

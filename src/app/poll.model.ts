@@ -5,4 +5,6 @@ export interface Poll {
   optionB: string;
   aVotes: number;
   bVotes: number;
+  aWinText: string;
+  bWinText: string;
 }

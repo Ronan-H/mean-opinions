@@ -17,7 +17,9 @@ export class PollCreateComponent implements OnInit {
       form.value.title,
       form.value.description,
       form.value.optionA,
-      form.value.optionB
+      form.value.optionB,
+      form.value.aWinText,
+      form.value.bWinText
     ).subscribe();
     
     console.log(form.value);

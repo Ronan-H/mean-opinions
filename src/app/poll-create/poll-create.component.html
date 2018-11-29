@@ -48,6 +48,30 @@
       <mat-error *ngIf="content.invalid">Please specify option B.</mat-error>
     </mat-form-field>
 
+    <mat-form-field>
+      <textarea
+        matInput
+        rows="1"
+        name="aWinText"
+        ngModel
+        required
+        placeholder="Option A win text"
+        #content="ngModel"></textarea>
+      <mat-error *ngIf="content.invalid">Please specify win text for option A.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea
+        matInput
+        rows="1"
+        name="bWinText"
+        ngModel
+        required
+        placeholder="Option B win text"
+        #content="ngModel"></textarea>
+      <mat-error *ngIf="content.invalid">Please specify win text for option B.</mat-error>
+    </mat-form-field>
+
     <button
       mat-raised-button
       color="accent"

@@ -26,8 +26,8 @@
     <mat-action-row>
       <!-- buttons to vote for option A or B -->
       <!-- calls the same function but passes different arguments to specify A or B -->
-      <button mat-button (click)="onVote(poll._id, 'A')" color="primary">VOTE A</button>
-      <button mat-button (click)="onVote(poll._id, 'B')" color="primary">VOTE B</button>
+      <button mat-button (click)="onVote(poll._id, 'A')" color="accent">VOTE A</button>
+      <button mat-button (click)="onVote(poll._id, 'B')" color="accent">VOTE B</button>
       <!-- button to delete this poll -->
       <button mat-button (click)="onDelete(poll._id)" color="warn">DELETE</button>
     </mat-action-row>

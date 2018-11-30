@@ -20,6 +20,10 @@ import { PollEditComponent } from './poll-edit/poll-edit.component';
 
 const appRoutes: Routes = [
   {
+    path: '',
+    component: PollDetailsComponent
+  },
+  {
     path: 'list',
     component: PollDetailsComponent
   },

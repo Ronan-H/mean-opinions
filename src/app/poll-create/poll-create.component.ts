@@ -11,12 +11,12 @@ export class PollCreateComponent implements OnInit {
 
   constructor(private service:PollService) { }
 
-  onAddPost(form: NgForm) {
+  onAddPoll(form: NgForm) {
     // ensure user can't submit invalid form by exiting the method
     if (!form.valid) return;
 
     // pass the form on to the poll service
-    this.service.addPost(
+    this.service.addPoll(
       form.value.title,
       form.value.description,
       form.value.optionA,

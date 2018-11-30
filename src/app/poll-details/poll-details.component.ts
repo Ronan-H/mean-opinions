@@ -25,7 +25,7 @@ export class PollDetailsComponent implements OnInit, AfterViewInit {
 
   ngOnInit(){
     // retrieve poll data from poll service
-    this.ps.getPostsData().subscribe(data => {
+    this.ps.getPollsData().subscribe(data => {
         this.polls = data;
     });
   }
@@ -121,7 +121,7 @@ export class PollDetailsComponent implements OnInit, AfterViewInit {
   // service class and refresh the page
 
   onDelete(id:String){
-    this.ps.deletePost(id).subscribe(() =>
+    this.ps.deletePoll(id).subscribe(() =>
     {
         this.ngOnInit();
     })

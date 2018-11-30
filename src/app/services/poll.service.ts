@@ -11,18 +11,18 @@ export class PollService {
   constructor(private http: HttpClient) { }
   
   // retrieve data for all polls
-  getPostsData(): Observable<any> {
-    return this.http.get("http://localhost:8081/api/posts");
+  getPollsData(): Observable<any> {
+    return this.http.get("http://localhost:8081/api/polls");
   }
 
   // used a HTTP request to add a poll using a POST request
-  addPost(title: string,
+  addPoll(title: string,
     description: string,
     optionA: string,
     optionB: string,
     aWinText: string,
     bWinText: string): Observable<any> {
-    const post: Poll = {
+    const poll: Poll = {
       title: title,
       description: description,
       optionA: optionA,
@@ -32,22 +32,22 @@ export class PollService {
       aWinText: aWinText,
       bWinText: bWinText
     };
-    return this.http.post("http://localhost:8081/api/posts",post);
+    return this.http.post("http://localhost:8081/api/polls", poll);
   }
 
   // delete poll from the database
-  deletePost(id: String): Observable<any> {
-    return this.http.delete("http://localhost:8081/api/posts/"+id);
+  deletePoll(id: String): Observable<any> {
+    return this.http.delete("http://localhost:8081/api/polls/"+id);
   }
 
   // increment vote count by 1 for a certain poll (for either option a or b)
   addVoteFor(id: String, option: String) {
-    return this.http.get("http://localhost:8081/api/posts/vote/" + id + "/" + option);
+    return this.http.get("http://localhost:8081/api/polls/vote/" + id + "/" + option);
   }
 
   // get a specific poll from the database
   getPoll(id:String): Observable<any> {
-    return this.http.get("http://localhost:8081/api/posts/"+id);
+    return this.http.get("http://localhost:8081/api/polls/"+id);
   }
 
   // update a poll, with new details
@@ -72,7 +72,7 @@ export class PollService {
       bWinText: bWinText
     };
     
-  return this.http.put("http://localhost:8081/api/posts/"+id, poll);
+  return this.http.put("http://localhost:8081/api/polls/"+id, poll);
 }
 
 }

@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">Poll listing</mat-toolbar>
 <mat-accordion multi="true" *ngIf="polls.length > 0">
-  <mat-expansion-panel class="postPanel" [expanded]="true" *ngFor="let poll of polls">
+  <mat-expansion-panel [expanded]="true" *ngFor="let poll of polls">
     <mat-expansion-panel-header>
       <mat-panel-title>{{ poll.title }}</mat-panel-title>
       <mat-panel-description>{{ poll.description }}</mat-panel-description>

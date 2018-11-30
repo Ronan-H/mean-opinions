@@ -15,7 +15,7 @@ export class PollSummaryComponent implements OnInit {
   constructor(private ps:PollService){}
 
   ngOnInit(){
-    this.ps.getPostsData().subscribe(data => {
+    this.ps.getPollsData().subscribe(data => {
         // load in polls from service
         this.polls = data;
 

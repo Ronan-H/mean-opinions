@@ -30,25 +30,10 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept");
     next();
-    });
-    
-app.post('/name', function(req, res){
-    res.send("Hello you sent " +
-    req.body.firstname + " " +
-    req.body.lastname);
-})
+});
 
-app.post('/api/posts', function(req, res){
-    console.log("post successful");
-    console.log(req.body.title);
-    console.log(req.body.description);
-    console.log(req.body.optionA);
-    console.log(req.body.optionB);
-    console.log(req.body.aVotes);
-    console.log(req.body.bVotes);
-    console.log(req.body.aWinText);
-    console.log(req.body.bWinText);
-
+// handles request to add add poll
+app.post('/api/polls', function(req, res){
     PollModel.create({
         title: req.body.title,
         description: req.body.description,
@@ -59,57 +44,45 @@ app.post('/api/posts', function(req, res){
         aWinText: req.body.aWinText,
         bWinText: req.body.bWinText
     });
-    res.send('Item added');
-
-
+    res.status(201).json({message: 'Item added'});
 })
 
-app.get('/api/posts', function(req, res){
+// handles request to get all poll details
+app.get('/api/polls', function(req, res){
     PollModel.find(function(err, data){
         res.json(data);
     });
 })
 
-// voting functionality, done with an updating get request
-app.get('/api/posts/vote/:id/:option', function(req, res){
-    console.log("Vote received");
-    console.log("id: " + req.params.id);
-    console.log("option: " + req.params.option);
-
+// handles poll vote request, done with an updating get request
+app.get('/api/polls/vote/:id/:option', function(req, res){
     PollModel.findOneAndUpdate({_id:req.params.id},
         // increment either aVotes or bVotes depending on which option was passed
         // up in the request
         (req.params.option === "A") ? {$inc: {aVotes: 1}} : {$inc: {bVotes: 1}},
         function(err, data){
-        console.log("Found poll: " + data.title);
-
-        res.json(data);
-    });
+            res.json(data);
+        });
 })
 
-app.get('/api/posts/:id', function(req, res){
-    console.log("Getting poll " +req.params.id);
-
-    //PostModel.find({_id : req.params.id}, 
+// handles request to get a specific poll by id
+app.get('/api/polls/:id', function(req, res){
     PollModel.findById(req.params.id,
         function (err, data) {
             res.json(data);
         });
 })
 
-app.put('/api/posts/:id', function(req, res){
-    console.log("Update Post" +req.params.id);
-    console.log(req.body.title);
-
+// handles request to update specific post
+app.put('/api/polls/:id', function(req, res){
     PollModel.findByIdAndUpdate(req.params.id, req.body, 
         function(err, data){
             res.send(data);
         })
 })
 
-app.delete('/api/posts/:id', function(req, res){
-    console.log(req.params.id);
-
+// handldes request to delete poll by id
+app.delete('/api/polls/:id', function(req, res){
     PollModel.deleteOne({_id:req.params.id},
     function(err, data)
     {
@@ -118,7 +91,6 @@ app.delete('/api/posts/:id', function(req, res){
         res.send(data);
     })
 })
-
 
 var server = app.listen(8081, function () {
    var host = server.address().address

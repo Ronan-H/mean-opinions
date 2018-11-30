@@ -12,7 +12,10 @@ export class PollCreateComponent implements OnInit {
   constructor(private service:PollService) { }
 
   onAddPost(form: NgForm) {
+    // ensure user can't submit invalid form by exiting the method
+    if (!form.valid) return;
 
+    // pass the form on to the poll service
     this.service.addPost(
       form.value.title,
       form.value.description,
@@ -22,15 +25,10 @@ export class PollCreateComponent implements OnInit {
       form.value.bWinText
     ).subscribe();
     
-    console.log(form.value);
+    // reset the form to allow the user to create another poll
     form.resetForm();
   }
 
-
-  ngOnInit() {
-
-
-
-  }
+  ngOnInit() {}
 
 }

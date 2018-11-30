@@ -12,19 +12,23 @@ import { NgForm } from "@angular/forms";
   styleUrls: ['./poll-edit.component.css']
 })
 export class PollEditComponent implements OnInit {
+  // poll to edit
   poll : any = [];
   
   constructor(private router:Router, private route: ActivatedRoute, private service:PollService) { }
 
   ngOnInit() {
-    console.log(this.route.snapshot.params['id']);
+    // load in poll data to be edited
     this.service.getPoll(this.route.snapshot.params['id']).subscribe(data =>
     {
       this.poll = data;
-      console.log(this.poll);
     });
   }
   onEditPoll(form: NgForm) {
+    // ensure user can't submit invalid form by exiting the method
+    if (!form.valid) return;
+
+    // pass the form on to the poll service
     this.service.updatePoll(this.poll._id,
       form.value.title,
       form.value.description,
@@ -35,6 +39,7 @@ export class PollEditComponent implements OnInit {
       form.value.aWinText,
       form.value.bWinText).subscribe(() =>
     {
+      // go back to the poll listing
       this.router.navigate(['/list']);
     });
   }

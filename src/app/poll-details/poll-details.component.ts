@@ -12,18 +12,19 @@ import { ElementRef } from '@angular/core';
 
 export class PollDetailsComponent implements OnInit, AfterViewInit {
   // lines regarding canvas use in Angular taken from StackOverflow question
-  //@ViewChild('statCanvas') statCanvas: ElementRef;
   @ViewChildren('statCanvas', {read: ElementRef})
   // list of bar chart canvases (1 for each poll)
   private canvases: QueryList<ElementRef>;
+  // canvas context for drawing
   private context: CanvasRenderingContext2D;
   
+  // list of polls
   polls: any = [];
 
   constructor(private ps:PollService){}
 
   ngOnInit(){
-    //this.posts = this.ps.getPosts();
+    // retrieve poll data from poll service
     this.ps.getPostsData().subscribe(data => {
         this.polls = data;
     });
@@ -33,10 +34,12 @@ export class PollDetailsComponent implements OnInit, AfterViewInit {
     // fix for "this" not working in lambda function
     let selfRef = this;
 
-    // create code to run when the bar char canvases are changed
+    // code to run when the bar char canvases are changed
 
     // (without this lambda function, because of the ngIf, the canvases
     // may not exist yet)
+
+    // this also makes the bar charts update live when the user votes
     this.canvases.changes.subscribe(() =>
       {
         this.canvases.forEach((canvas, index) => {
@@ -53,6 +56,7 @@ export class PollDetailsComponent implements OnInit, AfterViewInit {
             let width: number = ctx.canvas.width;
             let height: number = ctx.canvas.height;
 
+            // calculate bar width based on canvas width
             let barWidth: number = Math.round(width / 3.5);
             // the maximum height a bar can be (when it represents the
             // higher voted option)
@@ -117,7 +121,6 @@ export class PollDetailsComponent implements OnInit, AfterViewInit {
   // service class and refresh the page
 
   onDelete(id:String){
-    console.log("Delete called "+ id);
     this.ps.deletePost(id).subscribe(() =>
     {
         this.ngOnInit();
@@ -125,7 +128,6 @@ export class PollDetailsComponent implements OnInit, AfterViewInit {
   }
 
   onVote(id: String, option: String) {
-    console.log("Vote for called "+ id + ", option " + option);
     this.ps.addVoteFor(id, option).subscribe(() =>
     {
       this.ngOnInit();

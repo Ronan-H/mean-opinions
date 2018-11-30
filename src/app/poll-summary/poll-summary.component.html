@@ -1,13 +1,21 @@
 <div id="summary">
-    <h3 *ngIf="polls == null">Loading...</h3>
+  <!--loading message, if the polls haven't been loaded in yet -->
+  <h3 *ngIf="polls == null">Loading...</h3>
 
-    <h3 *ngIf="polls.length == 0">No polls to display, please create some first.</h3>
-    
-    <div *ngIf="polls.length > 0">
+  <h3 *ngIf="polls.length == 0">No polls to display, please create some first.</h3>
+  
+  <div *ngIf="polls.length > 0">
+
+    <ul>
       <div *ngFor="let poll of polls">
-        <h2>{{ poll.aVotes == poll.bVotes ? "\"" + poll.title + "\" (" + poll.optionA + " or " + poll.optionB + "): even votes, poll undecided." : (poll.aVotes > poll.bVotes ? poll.aWinText : poll.bWinText) }}</h2>
+        <li>
+          <!-- Picks the appropriate win text to display for this poll -->
+          <!-- with a nested conditional operator...-->
+          <h2>{{ poll.aVotes == poll.bVotes ? "\"" + poll.title + "\" (" + poll.optionA + " or " + poll.optionB + "): even votes, poll undecided." : (poll.aVotes > poll.bVotes ? poll.aWinText : poll.bWinText) }}</h2>
+        </li>
       </div>
+    </ul>
 
-      <h2 id="total-votes">Total votes: {{ totalVotes }}</h2>
-    </div>
+    <h2 id="total-votes">Total votes: {{ totalVotes }}</h2>
+  </div>
 </div>

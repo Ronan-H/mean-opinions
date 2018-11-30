@@ -1,3 +1,5 @@
+<!-- Poll edit component. Very similar to poll create. -->
+
 <mat-card>
   <form (submit)="onEditPoll(pollForm)" #pollForm="ngForm">
     <mat-form-field>
@@ -21,7 +23,6 @@
           placeholder="Poll description (optional)"
   
           #content="ngModel"></textarea>
-        <!-- <mat-error *ngIf="content.invalid">Please enter a post title.</mat-error> -->
       </mat-form-field>
   
       <mat-form-field>

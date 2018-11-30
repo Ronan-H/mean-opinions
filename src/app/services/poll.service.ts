@@ -10,6 +10,7 @@ export class PollService {
 
   constructor(private http: HttpClient) { }
   
+  // retrieve data for all polls
   getPostsData(): Observable<any> {
     return this.http.get("http://localhost:8081/api/posts");
   }
@@ -34,18 +35,22 @@ export class PollService {
     return this.http.post("http://localhost:8081/api/posts",post);
   }
 
+  // delete poll from the database
   deletePost(id: String): Observable<any> {
     return this.http.delete("http://localhost:8081/api/posts/"+id);
   }
 
+  // increment vote count by 1 for a certain poll (for either option a or b)
   addVoteFor(id: String, option: String) {
     return this.http.get("http://localhost:8081/api/posts/vote/" + id + "/" + option);
   }
 
+  // get a specific poll from the database
   getPoll(id:String): Observable<any> {
     return this.http.get("http://localhost:8081/api/posts/"+id);
   }
 
+  // update a poll, with new details
   updatePoll(id: string,
     title: string,
     description: string,
